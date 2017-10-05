@@ -1,0 +1,22 @@
+<h1>Posts</h1>
+<div class="row">
+    <div class="col-md-6">
+        <app-spinner [visible]="postsLoading"></app-spinner>
+        <app-pagination [items]="posts" (page-changed)="onPageChanged($event)"></app-pagination>
+        <ul class="list-group posts">
+            <li *ngFor="let post of pagedPosts" class="list-group-item" [class.active]="currentPost == post" (click)="select(post)">
+              Post no. {{ post.id }} : {{ post.title }}
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <div *ngIf="currentPost" class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Post no. {{ currentPost.id }} : {{ currentPost.title }}</h3>
+            </div>
+            <div class="panel-body">
+                <p>{{ currentPost.body }}</p>
+                <hr/>
+            </div>
+        </div>
+    </div>
